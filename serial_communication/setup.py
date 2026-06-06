@@ -23,7 +23,7 @@ setup(
     },
     entry_points={
         "console_scripts": [
-            "simple_uart = serial_communication.simple_uart:main",
+            "uart_recv = serial_communication.uart_recv:main",
         ],
     },
 )

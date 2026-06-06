@@ -4,8 +4,8 @@ launch:
       default: "/dev/ttyACM0"
   - node:
       pkg: serial_communication
-      exec: simple_uart
-      name: simple_uart
+      exec: uart_recv
+      name: uart_recv
       param:
         - name: port
           value: "$(var port)"
