@@ -1,5 +1,11 @@
 launch:
+  - arg:
+      name: port
+      default: "/dev/ttyACM0"
   - node:
       pkg: serial_communication
       exec: simple_uart
       name: simple_uart
+      param:
+        - name: port
+          value: "$(var port)"

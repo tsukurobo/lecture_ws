@@ -6,8 +6,10 @@ from rclpy.node import Node
 class SerialNode(Node):
     def __init__(self):
         super().__init__("serial_node")
+        self.declare_parameter("port", "/dev/ttyACM0")
+        port = self.get_parameter("port").value
 
-        self.ser = serial.Serial(port="/dev/ttyUSB0", baudrate=9600, timeout=1)
+        self.ser = serial.Serial(port=port, baudrate=9600, timeout=1)
 
         self.timer = self.create_timer(0.1, self.read_serial)
 
