@@ -1,0 +1,5 @@
+launch:
+  - node:
+      pkg: serial_communication
+      exec: simple_uart
+      name: simple_uart
