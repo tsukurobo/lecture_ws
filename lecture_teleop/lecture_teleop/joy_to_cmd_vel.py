@@ -14,10 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Convert Joy messages into cmd_vel commands."""
-
-from __future__ import annotations
-
 from geometry_msgs.msg import Twist
 from rclpy.node import Node
 from sensor_msgs.msg import Joy
@@ -26,70 +22,29 @@ import rclpy
 
 
 class JoyToCmdVelNode(Node):
-    """Subscribe to Joy and publish velocity commands."""
+    # ノードの初期化
+    def __init__(self):
+        # ノードの初期化
+        super().__init__('joy_to_cmd_vel_node')
 
-    def __init__(self) -> None:
-        super().__init__('joy_to_cmd_vel')
+        # パブリッシャの作成
+        self._publisher = self.create_publisher(Twist, '/cmd_vel', 10)
 
-        self.declare_parameter('joy_topic', '/joy')
-        self.declare_parameter('cmd_vel_topic', '/cmd_vel')
-        self.declare_parameter('axis_linear', 1)
-        self.declare_parameter('axis_angular', 0)
-        self.declare_parameter('scale_linear', 0.5)
-        self.declare_parameter('scale_angular', 1.5)
-        self.declare_parameter('deadman_button', -1)
+        # サブスクライバの作成
+        self.create_subscription(Joy, '/joy', self._on_joy, 10)
 
-        joy_topic = self.get_parameter('joy_topic').value
-        cmd_vel_topic = self.get_parameter('cmd_vel_topic').value
-        self._axis_linear = int(self.get_parameter('axis_linear').value)
-        self._axis_angular = int(self.get_parameter('axis_angular').value)
-        self._scale_linear = float(self.get_parameter('scale_linear').value)
-        self._scale_angular = float(self.get_parameter('scale_angular').value)
-        self._deadman_button = int(self.get_parameter('deadman_button').value)
-
-        self._publisher = self.create_publisher(Twist, cmd_vel_topic, 10)
-        self._subscription = self.create_subscription(
-            Joy,
-            joy_topic,
-            self._on_joy,
-            10,
-        )
-
-        self.get_logger().info(
-            f'Listening to {joy_topic} and publishing {cmd_vel_topic}',
-        )
-
-    @staticmethod
-    def _read_axis(values: list[float], index: int) -> float:
-        if index < 0 or index >= len(values):
-            return 0.0
-        return float(values[index])
-
-    @staticmethod
-    def _read_button(values: list[int], index: int) -> bool:
-        if index < 0 or index >= len(values):
-            return False
-        return bool(values[index])
-
-    def _on_joy(self, message: Joy) -> None:
+    # Joyメッセージを受信したときのコールバック関数
+    def _on_joy(self, message):
+        # Twistメッセージを作成
         twist = Twist()
 
-        if self._deadman_button >= 0 and not self._read_button(
-            message.buttons,
-            self._deadman_button,
-        ):
-            self._publisher.publish(twist)
-            return
-
-        twist.linear.x = self._read_axis(message.axes, self._axis_linear) * self._scale_linear
-        twist.angular.z = (
-            self._read_axis(message.axes, self._axis_angular) * self._scale_angular
-        )
+        # Joyメッセージの値をTwistメッセージに変換
+        
+        # Twistメッセージをパブリッシュ
         self._publisher.publish(twist)
 
 
-def main(args: list[str] | None = None) -> None:
-    """Run the Joy to cmd_vel node."""
+def main(args=None):
     rclpy.init(args=args)
     node = JoyToCmdVelNode()
     try:
