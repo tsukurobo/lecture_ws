@@ -24,6 +24,7 @@ setup(
     entry_points={
         "console_scripts": [
             "uart_recv = serial_communication.uart_recv:main",
+            "uart_send = serial_communication.uart_send:main",
         ],
     },
 )

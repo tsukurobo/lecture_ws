@@ -8,7 +8,7 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
   if(Serial.available() > 0){
-    char data = Serial.read();
+    String data = Serial.readStringUntil('\n');
 
     Serial.println(data);
   }
