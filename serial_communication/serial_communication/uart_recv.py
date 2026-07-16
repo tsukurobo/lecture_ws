@@ -10,7 +10,7 @@ class SerialNode(Node):
 
         port = self.get_parameter("port").value
 
-        self.ser = serial.Serial(port=port, baudrate=38400, timeout=1)
+        self.ser = serial.Serial(port=port, baudrate=115200, timeout=1)
 
         self.timer = self.create_timer(0.1, self.read_serial)
 
