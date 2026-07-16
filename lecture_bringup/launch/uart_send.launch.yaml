@@ -1,0 +1,11 @@
+launch:
+  - arg:
+      name: port
+      default: "/dev/ttyACM0"
+  - node:
+      pkg: serial_communication
+      exec: uart_send
+      name: uart_send
+      param:
+        - name: port
+          value: "$(var port)"
