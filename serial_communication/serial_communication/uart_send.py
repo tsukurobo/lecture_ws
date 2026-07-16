@@ -1,6 +1,6 @@
 import rclpy
-import serial
 from rclpy.node import Node
+import serial
 
 
 class SerialNode(Node):

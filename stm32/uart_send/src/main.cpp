@@ -11,7 +11,7 @@ void loop() {
   // put your main code here, to run repeatedly:
   Serial.println(n);
   n++;
-  
+
   // 遅延
   delay(1000);
 }
