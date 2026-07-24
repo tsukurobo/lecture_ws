@@ -24,6 +24,7 @@ setup(
     },
     entry_points={
         "console_scripts": [
+            'distance_sensor_recv = serial_communication.distance_sensor_recv:main',
             "uart_recv = serial_communication.uart_recv:main",
             "uart_send = serial_communication.uart_send:main",
         ],
