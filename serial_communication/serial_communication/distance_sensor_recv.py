@@ -19,7 +19,25 @@ class DistanceSensorRecv(Node):
         if self.ser.in_waiting == 0:
             return
 
-        distance = int(self.ser.readline().decode().strip())
+        # TODO
+        # シリアルから1行読み取る
+        line = self.ser.____________()
+
+        # 文字列を距離の整数値へ変換する
+        distance = int(
+            line.decode().strip()
+        )
+
+        # UInt16
+        # └── data
+        #
+        # 例:
+        # message.data = 523
+
+        # TODO
+        # 1. UInt16メッセージを作成する
+        # 2. distanceをmessage.dataへ代入する
+        # 3. Publishする
 
 
 def main():
