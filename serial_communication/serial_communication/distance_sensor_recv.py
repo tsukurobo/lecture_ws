@@ -21,10 +21,6 @@ class DistanceSensorRecv(Node):
 
         distance = int(self.ser.readline().decode().strip())
 
-        message = UInt16()
-        message.data = distance
-        self.publisher.publish(message)
-
 
 def main():
     rclpy.init()
