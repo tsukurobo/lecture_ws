@@ -7,7 +7,8 @@ import serial
 class MotorSerial(Node):
     def __init__(self):
         super().__init__('motor_serial')
-        self.declare_parameter('port', '/dev/ttyACM1')
+        self.declare_parameter('port', '/dev/ttyACM0')
+        self.declare_parameter('max_speed', 255)
 
         port = self.get_parameter('port').value
 
@@ -18,12 +19,14 @@ class MotorSerial(Node):
         self.get_logger().info(f'Serial port {port} opened for motor control.')
 
     def joy_callback(self, msg):
-        # Joyの値（-1.0～1.0）をモータの値（-255～255）に変換
-        left_motor = int(msg.axes[1] * 255)
-        right_motor = int(msg.axes[4] * 255)
+        max_speed = self.get_parameter('max_speed').value
 
-        # 「左モータ,右モータ」の形式で送信
-        data = f'{left_motor},{right_motor}\n'
+        # Joyの値（-1.0～1.0）をモータの値（-255～255）に変換
+        motor1 = int(msg.axes[1] * max_speed)
+        motor2 = int(msg.axes[4] * max_speed)
+
+        # 「モータ1,モータ2」の形式で送信
+        data = f'{motor1},{motor2}\n'
         self.ser.write(data.encode())
         self.get_logger().info(f'Sent to motor: {data.strip()}')
 
