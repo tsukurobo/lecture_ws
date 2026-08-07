@@ -8,7 +8,10 @@ class MotorSerial(Node):
     def __init__(self):
         super().__init__('motor_serial')
         self.declare_parameter('port', '/dev/ttyACM0')
-        self.declare_parameter('max_speed', 255)
+
+        # 演習3 TODO
+        # 初期値255でmax_speedを宣言する
+        # self.________________________________________
 
         port = self.get_parameter('port').value
 
@@ -19,16 +22,23 @@ class MotorSerial(Node):
         self.get_logger().info(f'Serial port {port} opened for motor control.')
 
     def joy_callback(self, msg):
-        max_speed = self.get_parameter('max_speed').value
+        # 演習3では、ここでmax_speedの現在値を取得し、
+        # 下のモータ指令値の計算に使用する
 
-        # Joyの値（-1.0～1.0）をモータの値（-255～255）に変換
-        motor1 = int(msg.axes[1] * max_speed)
-        motor2 = int(msg.axes[4] * max_speed)
+        # TODO
+        # Joyの値（-1.0～1.0）を
+        # モータの値（-255～255）に変換する
+        # 軸番号は使用するジョイコンに合わせる
+        motor1 = ______________________________
+        motor2 = ______________________________
 
-        # 「モータ1,モータ2」の形式で送信
-        data = f'{motor1},{motor2}\n'
-        self.ser.write(data.encode())
-        self.get_logger().info(f'Sent to motor: {data.strip()}')
+        # TODO
+        # 「モータ1,モータ2\n」の文字列を作る
+        data = ______________________________
+
+        # TODO
+        # 文字列をbytes型へ変換して送信する
+        self.ser.write(______________________________)
 
 
 def main():

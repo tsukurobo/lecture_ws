@@ -8,8 +8,6 @@ def generate_launch_description():
             package='joy',
             executable='joy_node',
         ),
-        Node(
-            package='serial_communication',
-            executable='motor_serial',
-        ),
+        # TODO
+        # motor_serialノードを追加する
     ])

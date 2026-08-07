@@ -11,21 +11,22 @@ void setup() {
 
 void loop() {
   if (Serial.available() > 0) {
-    // ROSから「モータ1,モータ2\n」の形式で受信
-    String data = Serial.readStringUntil('\n');
+    // TODO
+    // 改行までデータを読み取る
+    String data = Serial.________________________;
 
-    // コンマの位置を探して、2つの値に分ける
-    int commaPosition = data.indexOf(',');
-    int motor1Speed = data.substring(0, commaPosition).toInt();
-    int motor2Speed = data.substring(commaPosition + 1).toInt();
+    // TODO
+    // コンマの位置を探す
+    int commaPosition = data.________________________;
 
-    // -255～255の値でモータを回す
-    motor1.setSpeed(motor1Speed);
-    motor2.setSpeed(motor2Speed);
+    // TODO
+    // コンマの前後を整数へ変換する
+    int motor1Speed = ________________________________;
+    int motor2Speed = ________________________________;
 
-    Serial.print("Motor 1 Speed: ");
-    Serial.print(motor1Speed);
-    Serial.print(", Motor 2 Speed: ");
-    Serial.println(motor2Speed);
+    // TODO
+    // 2つのモータへ指令値を渡す
+    _________________________________________________;
+    _________________________________________________;
   }
 }
