@@ -10,6 +10,7 @@ ROS 2 Jazzy を使ったロボット講習用ワークスペースです。
 | `lecture_description` | ロボットの URDF/Xacro、メッシュ、RViz 表示用設定 |
 | `lecture_simulation` | Gazebo Sim のフィールド、ロボットのスポーン、ROS 2 ブリッジ |
 | `lecture_teleop` | `sensor_msgs/msg/Joy` を `geometry_msgs/msg/Twist` に変換する操作学習用ノード |
+| `lecture_teleop_cpp` | `sensor_msgs/msg/Joy` を `geometry_msgs/msg/Twist` に変換する操作学習用ノード（C++版） |
 | `serial_communication` | PC 側から UART を送受信する ROS 2 ノード |
 | `lecture_bringup` | UART 送受信ノードを起動する launch ファイル |
 | `stm32/uart_send` | STM32 からカウント値を送信する PlatformIO プロジェクト |
@@ -181,6 +182,7 @@ just clean
 ├── lecture_description/   # ロボットモデルと RViz 設定
 ├── lecture_simulation/    # Gazebo Sim のワールドと launch
 ├── lecture_teleop/        # ゲームパッド操作
+├── lecture_teleop_cpp/    # rclcpp版を実装する講習用の雛形
 ├── serial_communication/  # ROS 2 UART ノード
 ├── lecture_bringup/       # UART launch ファイル
 ├── stm32/                 # PlatformIO サンプル
