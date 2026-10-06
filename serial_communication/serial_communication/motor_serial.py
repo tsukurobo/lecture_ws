@@ -1,34 +1,34 @@
+import math
+
 import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import Joy
 import serial
-import math
+
 
 class MotorSerial(Node):
     def __init__(self):
-        super().__init__('motor_serial')
-        self.declare_parameter('port', '/dev/ttyACM0')
+        super().__init__("motor_serial")
+        self.declare_parameter("port", "/dev/ttyACM0")
 
         # 演習3 TODO
         # 初期値255でmax_speedを宣言する
         self.declare_parameter(
-            'Max_Speed',
+            "Max_Speed",
             20,
         )
 
-        port = self.get_parameter('port').value
+        port = self.get_parameter("port").value
 
         self.ser = serial.Serial(port=port, baudrate=115200, timeout=1)
-        self.subscription = self.create_subscription(
-            Joy, 'joy', self.joy_callback, 10
-        )
-        
-        self.get_logger().info(f'Serial port {port} opened for motor control.')
+        self.subscription = self.create_subscription(Joy, "joy", self.joy_callback, 10)
+
+        self.get_logger().info(f"Serial port {port} opened for motor control.")
 
     def joy_callback(self, msg):
         # 演習3では、ここでmax_speedの現在値を取得し、
         # 下のモータ指令値の計算に使用する
-        max_value = self.get_parameter('Max_Speed').value
+        max_value = self.get_parameter("Max_Speed").value
 
         # TODO
         # Joyの値（-1.0～1.0）を
@@ -46,13 +46,12 @@ class MotorSerial(Node):
         motor2 = int(-(inputx * s - inputy * s) + inputr)
         motor4 = int(inputx * s - inputy * s + inputr)
 
-
         # TODO
         # 「モータ1,モータ2\n」の文字列を作る
         if abs(motor1) > 0.05 or abs(motor2) > 0.05 or abs(motor3) > 0.05 or abs(motor4) > 0.05:
-            data = f'{motor1},{motor2},{motor3},{motor4}\n'
+            data = f"{motor1},{motor2},{motor3},{motor4}\n"
         else:
-            data = '0,0,0,0\n'
+            data = "0,0,0,0\n"
 
         self.get_logger().info(data)
 
@@ -69,5 +68,5 @@ def main():
     rclpy.shutdown()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

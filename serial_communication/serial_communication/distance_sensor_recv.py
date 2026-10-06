@@ -6,12 +6,12 @@ from std_msgs.msg import UInt16
 
 class DistanceSensorRecv(Node):
     def __init__(self):
-        super().__init__('distance_sensor_recv')
-        self.declare_parameter('port', '/dev/ttyACM0')
+        super().__init__("distance_sensor_recv")
+        self.declare_parameter("port", "/dev/ttyACM0")
 
-        port = self.get_parameter('port').value
+        port = self.get_parameter("port").value
 
-        self.publisher = self.create_publisher(UInt16, '/distance', 10)
+        self.publisher = self.create_publisher(UInt16, "/distance", 10)
         self.ser = serial.Serial(port, 115200, timeout=0.1)
         self.timer = self.create_timer(0.1, self.read_serial)
 
@@ -24,9 +24,7 @@ class DistanceSensorRecv(Node):
         line = self.ser.____________()
 
         # 文字列を距離の整数値へ変換する
-        distance = int(
-            line.decode().strip()
-        )
+        distance = int(line.decode().strip())
 
         # UInt16
         # └── data
@@ -52,5 +50,5 @@ def main():
     rclpy.shutdown()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
