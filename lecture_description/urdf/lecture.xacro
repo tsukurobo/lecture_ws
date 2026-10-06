@@ -1,0 +1,238 @@
+<?xml version="1.0"?>
+<robot name="lecture" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find lecture_description)/urdf/materials.xacro" />
+  <xacro:include filename="$(find lecture_description)/urdf/lecture.trans" />
+  <xacro:include filename="$(find lecture_description)/urdf/lecture.gazebo" />
+
+  <link name="base_footprint" />
+  <joint name="base_link_joint" type="fixed">
+    <parent link="base_footprint" />
+    <child link="base_link" />
+    <origin xyz="0 0 0.03" rpy="0 0 0" />
+  </joint>
+
+  <link name="base_link">
+    <inertial>
+      <origin xyz="-0.0012605599502361578 -8.917576403608184e-06 0.0005433686973854139" rpy="0 0 0" />
+      <mass value="3.826300119883122" />
+      <inertia ixx="0.018527" iyy="0.019477" izz="0.037328" ixy="-0.001432" iyz="-1e-06" ixz="3e-05" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 2.356194" />
+      <geometry>
+        <mesh filename="file://$(find lecture_description)/meshes/base_link.stl"
+          scale="0.001 0.001 0.001" />
+      </geometry>
+      <material name="silver" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 2.356194" />
+      <geometry>
+        <mesh filename="file://$(find lecture_description)/meshes/base_link.stl"
+          scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="left_forward_link">
+    <inertial>
+      <origin xyz="1.8326052827203112e-05 -0.006393049420570535 -1.0580551516706431e-05" rpy="0 0 0" />
+      <mass value="0.31089484227593567" />
+      <inertia ixx="8e-05" iyy="0.000133" izz="8e-05" ixy="-0.0" iyz="0.0" ixz="0.0" />
+    </inertial>
+    <visual>
+      <origin xyz="0.0 0.1493 -0.0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="file://$(find lecture_description)/meshes/left_forward_link.stl"
+          scale="0.001 0.001 0.001" />
+      </geometry>
+      <material name="silver" />
+    </visual>
+    <collision>
+      <origin xyz="0.0 0.1493 -0.0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="file://$(find lecture_description)/meshes/left_forward_link.stl"
+          scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="left_backward_link">
+    <inertial>
+      <origin xyz="0.006393049420570396 1.832605277156058e-05 -1.0580551543025885e-05" rpy="0 0 0" />
+      <mass value="0.31089484227593484" />
+      <inertia ixx="0.000133" iyy="8e-05" izz="8e-05" ixy="0.0" iyz="0.0" ixz="-0.0" />
+    </inertial>
+    <visual>
+      <origin xyz="-0.1493 -0.0 -0.0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="file://$(find lecture_description)/meshes/left_backward_link.stl"
+          scale="0.001 0.001 0.001" />
+      </geometry>
+      <material name="silver" />
+    </visual>
+    <collision>
+      <origin xyz="-0.1493 -0.0 -0.0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="file://$(find lecture_description)/meshes/left_backward_link.stl"
+          scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="right_forward_link">
+    <inertial>
+      <origin xyz="-0.006393049420570424 -1.8326052827223946e-05 -1.0580551516692069e-05"
+        rpy="0 0 0" />
+      <mass value="0.31089484227593595" />
+      <inertia ixx="0.000133" iyy="8e-05" izz="8e-05" ixy="0.0" iyz="-0.0" ixz="0.0" />
+    </inertial>
+    <visual>
+      <origin xyz="0.1493 -0.0 -0.0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="file://$(find lecture_description)/meshes/right_forward_link.stl"
+          scale="0.001 0.001 0.001" />
+      </geometry>
+      <material name="silver" />
+    </visual>
+    <collision>
+      <origin xyz="0.1493 -0.0 -0.0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="file://$(find lecture_description)/meshes/right_forward_link.stl"
+          scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="right_backward_link">
+    <inertial>
+      <origin xyz="-1.8326052771614796e-05 0.00639304942057034 -1.0580551543079707e-05" rpy="0 0 0" />
+      <mass value="0.3108948422759349" />
+      <inertia ixx="8e-05" iyy="0.000133" izz="8e-05" ixy="-0.0" iyz="-0.0" ixz="-0.0" />
+    </inertial>
+    <visual>
+      <origin xyz="-0.0 -0.1493 -0.0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="file://$(find lecture_description)/meshes/right_backward_link.stl"
+          scale="0.001 0.001 0.001" />
+      </geometry>
+      <material name="silver" />
+    </visual>
+    <collision>
+      <origin xyz="-0.0 -0.1493 -0.0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="file://$(find lecture_description)/meshes/right_backward_link.stl"
+          scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="left_forward_joint" type="continuous">
+    <origin xyz="0.106 0.106 0.0" rpy="0 0 2.356194" />
+    <parent link="base_link" />
+    <child link="left_forward_link" />
+    <axis xyz="0 -1 0" />
+  </joint>
+
+  <joint name="left_backward_joint" type="continuous">
+    <origin xyz="-0.106 0.106 0.0" rpy="0 0 2.356194" />
+    <parent link="base_link" />
+    <child link="left_backward_link" />
+    <axis xyz="1 0 0" />
+  </joint>
+
+  <joint name="right_backward_joint" type="continuous">
+    <origin xyz="-0.106 -0.106 0.0" rpy="0 0 2.356194" />
+    <parent link="base_link" />
+    <child link="right_backward_link" />
+    <axis xyz="0 1 0" />
+  </joint>
+
+  <joint name="right_forward_joint" type="continuous">
+    <origin xyz="0.106 -0.106 0.0" rpy="0 0 2.356194" />
+    <parent link="base_link" />
+    <child link="right_forward_link" />
+    <axis xyz="-1 0 0" />
+  </joint>
+
+  <link name="imu_link">
+    <inertial>
+      <mass value="0.01" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+    </inertial>
+  </link>
+
+  <joint name="imu_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="imu_link" />
+    <origin xyz="0 0 0.05" rpy="0 0 0" />
+  </joint>
+
+  <link name="base_scan">
+    <inertial>
+      <origin xyz="0 0 4" rpy="0 0 0" />
+      <mass value="0.1" />
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+    </inertial>
+  </link>
+
+  <joint name="lidar_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="base_scan" />
+    <origin xyz="0 0 0.05" rpy="0 0 0" />
+  </joint>
+
+  <ros2_control name="GazeboSimSystem" type="system">
+    <hardware>
+      <plugin>gz_ros2_control/GazeboSimSystem</plugin>
+    </hardware>
+    <joint name="left_forward_joint">
+      <command_interface name="velocity">
+        <param name="min">-6</param>
+        <param name="max">6</param>
+      </command_interface>
+      <state_interface name="position">
+        <param name="initial_value">0.0</param>
+      </state_interface>
+      <state_interface name="velocity" />
+      <state_interface name="effort" />
+    </joint>
+    <joint name="right_forward_joint">
+      <command_interface name="velocity">
+        <param name="min">-6</param>
+        <param name="max">6</param>
+      </command_interface>
+      <state_interface name="position">
+        <param name="initial_value">0.0</param>
+      </state_interface>
+      <state_interface name="velocity" />
+      <state_interface name="effort" />
+    </joint>
+    <joint name="left_backward_joint">
+      <command_interface name="velocity">
+        <param name="min">-6</param>
+        <param name="max">6</param>
+      </command_interface>
+      <state_interface name="position">
+        <param name="initial_value">0.0</param>
+      </state_interface>
+      <state_interface name="velocity" />
+      <state_interface name="effort" />
+    </joint>
+    <joint name="right_backward_joint">
+      <command_interface name="velocity">
+        <param name="min">-6</param>
+        <param name="max">6</param>
+      </command_interface>
+      <state_interface name="position">
+        <param name="initial_value">0.0</param>
+      </state_interface>
+      <state_interface name="velocity" />
+      <state_interface name="effort" />
+    </joint>
+  </ros2_control>
+
+
+</robot>

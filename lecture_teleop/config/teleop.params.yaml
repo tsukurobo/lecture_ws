@@ -1,0 +1,4 @@
+/**:
+  ros__parameters:
+    linear_scale: 1.0
+    angular_scale: 1.0
